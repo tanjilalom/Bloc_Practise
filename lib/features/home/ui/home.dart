@@ -25,7 +25,7 @@ class _HomeState extends State<Home> {
         return Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.blue,
-            title: Text('Store'),
+            title: const Text('Store'),
             centerTitle: true,
             actions: [
               IconButton(onPressed: (){
@@ -33,7 +33,7 @@ class _HomeState extends State<Home> {
               }, icon: Icon(Icons.favorite_border)),
               IconButton(onPressed: (){
                 homeBloc.add(HomeProductCartButtonClickedEvent());
-              }, icon: Icon(CupertinoIcons.shopping_cart)),
+              }, icon: const Icon(CupertinoIcons.shopping_cart)),
             ],
           ),
         );
