@@ -14,3 +14,5 @@ class HomeLoadedSuccessState extends HomeState {}
 class HomeErrorState extends HomeState {}
 
 class HomeNavigatetoWishlistState extends HomeActionState {}
+
+class HomeNavigatetoCartState extends HomeActionState {}

@@ -1,3 +1,4 @@
+import 'package:bloc_practise/features/cart/ui/cart.dart';
 import 'package:bloc_practise/features/home/bloc/home_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,9 +19,13 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return BlocConsumer<HomeBloc, HomeState>(
       bloc: homeBloc,
-      //listenWhen: (previous, current) {},
-      //buildWhen: (previous, current) {},
-      listener: (context, state) {},
+      listenWhen: (previous, current) => current is HomeActionState,
+      buildWhen: (previous, current) => current is !HomeActionState,
+      listener: (context, state) {
+        if(state is HomeNavigatetoCartState){
+          Navigator.push(context, MaterialPageRoute(builder: (context) => Cart()));
+        }
+      },
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
