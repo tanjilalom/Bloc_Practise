@@ -1,5 +1,6 @@
 import 'package:bloc_practise/features/cart/ui/cart.dart';
 import 'package:bloc_practise/features/home/bloc/home_bloc.dart';
+import 'package:bloc_practise/features/wishlist/ui/wishlist.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,6 +26,9 @@ class _HomeState extends State<Home> {
         if(state is HomeNavigatetoCartState){
           Navigator.push(context, MaterialPageRoute(builder: (context) => Cart()));
         }
+        else if(state is HomeNavigatetoWishlistState){
+          Navigator.push(context, MaterialPageRoute(builder: (context) => Wishlist()));
+        }
       },
       builder: (context, state) {
         return Scaffold(
@@ -34,10 +38,10 @@ class _HomeState extends State<Home> {
             centerTitle: true,
             actions: [
               IconButton(onPressed: (){
-                homeBloc.add(HomeProductWishlistClickedEvent());
+                homeBloc.add(HomeWishlistButtonNavigateEvent());
               }, icon: Icon(Icons.favorite_border)),
               IconButton(onPressed: (){
-                homeBloc.add(HomeProductCartButtonClickedEvent());
+                homeBloc.add(HomeCartButtonNavigateEvent());
               }, icon: const Icon(CupertinoIcons.shopping_cart)),
             ],
           ),
