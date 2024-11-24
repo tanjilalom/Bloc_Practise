@@ -17,12 +17,12 @@ class ProductTileWidget extends StatelessWidget {
             height: 200,
             width: double.infinity,
             decoration: BoxDecoration(
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: NetworkImage(productDataModel.imageUrl)
-              )
+                image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: NetworkImage(productDataModel.imageUrl,),)
             ),
           ),
+
           Text(productDataModel.id),
           Text("Name : ${productDataModel.name}", style: const TextStyle(fontSize: 22),),
           Text(productDataModel.description, style: const TextStyle(fontSize: 18),),

@@ -57,7 +57,7 @@ class _HomeState extends State<Home> {
                       onPressed: () {
                         homeBloc.add(HomeWishlistButtonNavigateEvent());
                       },
-                      icon: Icon(Icons.favorite_border)),
+                      icon: const Icon(Icons.favorite_border)),
                   IconButton(
                       onPressed: () {
                         homeBloc.add(HomeCartButtonNavigateEvent());
