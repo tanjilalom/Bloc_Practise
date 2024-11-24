@@ -1,5 +1,6 @@
 import 'package:bloc_practise/features/cart/ui/cart.dart';
 import 'package:bloc_practise/features/home/bloc/home_bloc.dart';
+import 'package:bloc_practise/features/home/ui/product_tile_widget.dart';
 import 'package:bloc_practise/features/wishlist/ui/wishlist.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
   @override
   void initState() {
     homeBloc.add(HomeInitialEvent());
@@ -39,13 +39,14 @@ class _HomeState extends State<Home> {
       },
       builder: (context, state) {
         switch (state.runtimeType) {
-          case HomeLoadingState():
+          case HomeLoadingState:
             return const Scaffold(
               body: Center(
                 child: CircularProgressIndicator(),
               ),
             );
-          case HomeLoadedSuccessState():
+          case HomeLoadedSuccessState:
+            final successState = state as HomeLoadedSuccessState;
             return Scaffold(
               appBar: AppBar(
                 backgroundColor: Colors.teal,
@@ -64,8 +65,15 @@ class _HomeState extends State<Home> {
                       icon: const Icon(CupertinoIcons.shopping_cart)),
                 ],
               ),
+              body: ListView.builder(
+                  itemCount: successState.products.length,
+                  itemBuilder: (context, index) {
+                    return ProductTileWidget(
+                        productDataModel: successState.products[index]);
+                  }),
             );
-          case HomeErrorState():
+
+          case HomeErrorState:
             return const Scaffold(
               body: Center(
                 child: Text('Error'),

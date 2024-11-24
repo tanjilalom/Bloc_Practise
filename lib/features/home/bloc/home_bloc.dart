@@ -10,7 +10,6 @@ part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(HomeInitialState()) {
-
     on<HomeInitialEvent>(homeInitialEvent);
 
     on<HomeWishlistButtonNavigateEvent>(homeWishlistButtonNavigateEvent);
@@ -18,9 +17,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<HomeCartButtonNavigateEvent>(homeCartButtonNavigateEvent);
   }
 
-  /*FutureOr<void> homeInitialEvent(HomeInitialEvent event, Emitter<HomeState> emit) async {
-
+  FutureOr<void> homeInitialEvent(
+      HomeInitialEvent event, Emitter<HomeState> emit) async {
     emit(HomeLoadingState());
+
     await Future.delayed(const Duration(seconds: 3));
     emit(HomeLoadedSuccessState(
         products: GroceryData.groceryProducts
@@ -33,12 +33,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
                   imageUrl: e['imageUrl']),
             )
             .toList()));
-  }*/
-
-  FutureOr<void> homeInitialEvent(HomeInitialEvent event, Emitter<HomeState> emit) {
-
-    emit(HomeLoadingState());
-
   }
 
   FutureOr<void> homeWishlistButtonNavigateEvent(
