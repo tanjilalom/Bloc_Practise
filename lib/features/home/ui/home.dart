@@ -14,6 +14,12 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
+  @override
+  void initState() {
+    homeBloc.add(HomeInitialEvent());
+    super.initState();
+  }
+
   final HomeBloc homeBloc = HomeBloc();
 
   @override
@@ -21,31 +27,53 @@ class _HomeState extends State<Home> {
     return BlocConsumer<HomeBloc, HomeState>(
       bloc: homeBloc,
       listenWhen: (previous, current) => current is HomeActionState,
-      buildWhen: (previous, current) => current is !HomeActionState,
+      buildWhen: (previous, current) => current is! HomeActionState,
       listener: (context, state) {
-        if(state is HomeNavigatetoCartState){
-          Navigator.push(context, MaterialPageRoute(builder: (context) => Cart()));
-        }
-        else if(state is HomeNavigatetoWishlistState){
-          Navigator.push(context, MaterialPageRoute(builder: (context) => Wishlist()));
+        if (state is HomeNavigatetoCartState) {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => Cart()));
+        } else if (state is HomeNavigatetoWishlistState) {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => Wishlist()));
         }
       },
       builder: (context, state) {
-        return Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.blue,
-            title: const Text('Store'),
-            centerTitle: true,
-            actions: [
-              IconButton(onPressed: (){
-                homeBloc.add(HomeWishlistButtonNavigateEvent());
-              }, icon: Icon(Icons.favorite_border)),
-              IconButton(onPressed: (){
-                homeBloc.add(HomeCartButtonNavigateEvent());
-              }, icon: const Icon(CupertinoIcons.shopping_cart)),
-            ],
-          ),
-        );
+        switch (state.runtimeType) {
+          case HomeLoadingState():
+            return const Scaffold(
+              body: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          case HomeLoadedSuccessState():
+            return Scaffold(
+              appBar: AppBar(
+                backgroundColor: Colors.teal,
+                title: const Text('Store'),
+                centerTitle: true,
+                actions: [
+                  IconButton(
+                      onPressed: () {
+                        homeBloc.add(HomeWishlistButtonNavigateEvent());
+                      },
+                      icon: Icon(Icons.favorite_border)),
+                  IconButton(
+                      onPressed: () {
+                        homeBloc.add(HomeCartButtonNavigateEvent());
+                      },
+                      icon: const Icon(CupertinoIcons.shopping_cart)),
+                ],
+              ),
+            );
+          case HomeErrorState():
+            return const Scaffold(
+              body: Center(
+                child: Text('Error'),
+              ),
+            );
+          default:
+            return SizedBox();
+        }
       },
     );
   }

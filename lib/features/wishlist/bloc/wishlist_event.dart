@@ -1,3 +1,4 @@
-abstract class WishlistEvent {}
+part of 'wishlist_bloc.dart';
 
-class InitEvent extends WishlistEvent {}
+@immutable
+abstract class WishlistEvent {}

@@ -1,20 +1,6 @@
-/*
-import 'package:equatable/equatable.dart';
+part of 'wishlist_bloc.dart';
 
-class WishlistState extends Equatable {
-  final String name;
+@immutable
+abstract class WishlistState {}
 
-  const WishlistState({required this.name});
-
-  WishlistState copyWith({
-    String? name,
-  }) {
-    return WishlistState(
-      name: name ?? this.name,
-    );
-  }
-
-  @override
-  List<Object> get props => [name];
-}
-*/
+class WishlistInitial extends WishlistState {}
