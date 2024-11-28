@@ -1,3 +1,4 @@
+import 'package:bloc_practise/features/time_details_note/bloc/timedetailsnote_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -110,8 +111,8 @@ class _AddTaskAlertDialogState extends State<AddTaskAlertDialog> {
 
             if (taskdate.isNotEmpty && taskDesc.isNotEmpty) {
               try {
-                context.read<HomeBloc>().add(TaskAddEvent(time: taskdate, text: taskDesc));
-                context.read<HomeBloc>().add(TaskLoadedEvent());
+                context.read<TimedetailsnoteBloc>().add(TaskAddEvent(time: taskdate, text: taskDesc));
+                context.read<TimedetailsnoteBloc>().add(TaskLoadedEvent());
                 Navigator.of(context).pop();
               } catch (e) {
                 debugPrint(e.toString());

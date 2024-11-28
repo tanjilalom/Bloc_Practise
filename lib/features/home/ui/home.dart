@@ -1,7 +1,7 @@
 import 'package:bloc_practise/features/cart/ui/cart.dart';
 import 'package:bloc_practise/features/home/bloc/home_bloc.dart';
 import 'package:bloc_practise/features/home/ui/product_tile_widget.dart';
-import 'package:bloc_practise/features/wishlist/ui/time_details_note.dart';
+import 'package:bloc_practise/features/time_details_note/ui/time_details_note.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -34,7 +34,7 @@ class _HomeState extends State<Home> {
               context, MaterialPageRoute(builder: (context) => Cart()));
         } else if (state is HomeNavigatetoWishlistState) {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => Wishlist()));
+              context, MaterialPageRoute(builder: (context) => TimeDetailsNote()));
         }
       },
       builder: (context, state) {
