@@ -22,7 +22,7 @@ class ProductTileWidget extends StatelessWidget {
                     image: NetworkImage(productDataModel.imageUrl,),)
             ),
           ),
-
+          const SizedBox(height: 5),
           Text(productDataModel.id),
           Text("Name : ${productDataModel.name}", style: const TextStyle(fontSize: 22),),
           Text(productDataModel.description, style: const TextStyle(fontSize: 18),),
