@@ -10,40 +10,31 @@ part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(HomeInitialState()) {
-    on<HomeInitialEvent>(homeInitialEvent);
+    on<HomeInitialEvent>((event, emit) async {
+      emit(HomeLoadingState());
 
-    on<HomeWishlistButtonNavigateEvent>(homeWishlistButtonNavigateEvent);
+      await Future.delayed(const Duration(seconds: 3));
+      emit(HomeLoadedSuccessState(
+          products: GroceryData.groceryProducts
+              .map(
+                (e) => ProductDataModel(
+                    id: e['id'],
+                    name: e['name'],
+                    description: e['description'],
+                    price: e['price'],
+                    imageUrl: e['imageUrl']),
+              )
+              .toList()));
+    });
 
-    on<HomeCartButtonNavigateEvent>(homeCartButtonNavigateEvent);
-  }
+    on<HomeWishlistButtonNavigateEvent>((event, emit) {
+      print('Wishlist Nav clicked');
+      emit(HomeNavigatetoTimeDetailsState());
+    });
 
-  FutureOr<void> homeInitialEvent(
-      HomeInitialEvent event, Emitter<HomeState> emit) async {
-    emit(HomeLoadingState());
-
-    await Future.delayed(const Duration(seconds: 3));
-    emit(HomeLoadedSuccessState(
-        products: GroceryData.groceryProducts
-            .map(
-              (e) => ProductDataModel(
-                  id: e['id'],
-                  name: e['name'],
-                  description: e['description'],
-                  price: e['price'],
-                  imageUrl: e['imageUrl']),
-            )
-            .toList()));
-  }
-
-  FutureOr<void> homeWishlistButtonNavigateEvent(
-      HomeWishlistButtonNavigateEvent event, Emitter<HomeState> emit) {
-    print('Wishlist Nav clicked');
-    emit(HomeNavigatetoWishlistState());
-  }
-
-  FutureOr<void> homeCartButtonNavigateEvent(
-      HomeCartButtonNavigateEvent event, Emitter<HomeState> emit) {
-    print('Cart Nav clicked');
-    emit(HomeNavigatetoCartState());
+    on<HomeCartButtonNavigateEvent>((event, emit) {
+      print('Wishlist Nav clicked');
+      emit(HomeNavigatetoCartState());
+    });
   }
 }

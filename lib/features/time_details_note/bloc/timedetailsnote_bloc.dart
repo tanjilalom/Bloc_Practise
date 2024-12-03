@@ -9,6 +9,7 @@ part 'timedetailsnote_state.dart';
 
 class TimedetailsnoteBloc extends Bloc<TimedetailsnoteEvent, TimedetailsnoteState> {
   TimedetailsnoteBloc() : super(TimedetailsnoteInitial()) {
+
     on<TaskAddEvent>((event, emit) async {
       var box = await Hive.openBox('tasksBox');
 
