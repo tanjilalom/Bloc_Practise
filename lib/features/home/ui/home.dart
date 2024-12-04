@@ -32,7 +32,7 @@ class _HomeState extends State<Home> {
         if (state is HomeNavigatetoCartState) {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => Cart()));
-        } else if (state is HomeNavigatetoWishlistState) {
+        } else if (state is HomeNavigatetoTimeDetailsState) {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => TimeDetailsNote()));
         }
@@ -57,12 +57,12 @@ class _HomeState extends State<Home> {
                       onPressed: () {
                         homeBloc.add(HomeWishlistButtonNavigateEvent());
                       },
-                      icon: const Icon(Icons.favorite_border)),
+                      icon: const Icon(Icons.note_alt_outlined)),
                   IconButton(
                       onPressed: () {
                         homeBloc.add(HomeCartButtonNavigateEvent());
                       },
-                      icon: const Icon(CupertinoIcons.shopping_cart)),
+                      icon: const Icon(Icons.list_alt_outlined)),
                 ],
               ),
               body: ListView.builder(
@@ -80,7 +80,7 @@ class _HomeState extends State<Home> {
               ),
             );
           default:
-            return SizedBox();
+            return const SizedBox();
         }
       },
     );
