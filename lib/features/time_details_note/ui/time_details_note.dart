@@ -43,18 +43,18 @@ class _TimeDetailsNoteState extends State<TimeDetailsNote> {
       ),
       body: BlocConsumer<TimedetailsnoteBloc, TimedetailsnoteState>(
         bloc: timedetailsnoteBloc,
-        listenWhen: (previous, current) => current is TimedetailsnoteActionState,
-        buildWhen: (previous, current) => current is! TimedetailsnoteActionState,
+        listenWhen: (previous, current) => current is TimedetailsnoteState,
+        buildWhen: (previous, current) => current is! TimedetailsnoteState,
         listener: (context, state) {},
         builder: (context, state) {
           if (state is TimedetailsnoteInitial) {
-            return const CircularProgressIndicator();
+            return Text('no Data');
           } else if (state is HomeLoadedState) {
             if (state.taskList.isEmpty) {
               const Text('No Text Found');
             } else {
               return ListView.separated(
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 separatorBuilder: (BuildContext context, int index) =>
                 const SizedBox(height: 10,),
                 itemCount: state.taskList.length,

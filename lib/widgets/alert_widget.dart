@@ -4,10 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AddTaskAlertDialog extends StatefulWidget {
+  const AddTaskAlertDialog({super.key});
 
-  const AddTaskAlertDialog({
-    super.key,
-  });
 
   @override
   State<AddTaskAlertDialog> createState() => _AddTaskAlertDialogState();
@@ -61,7 +59,6 @@ class _AddTaskAlertDialogState extends State<AddTaskAlertDialog> {
                       final TimeOfDay? timeOfDay = await showTimePicker(
                         context: context,
                         initialTime: selectedTime,
-
                         initialEntryMode: TimePickerEntryMode.dial,
                       );
                       if (timeOfDay != null) {

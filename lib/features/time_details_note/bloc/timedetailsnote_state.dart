@@ -3,8 +3,6 @@ part of 'timedetailsnote_bloc.dart';
 @immutable
 abstract class TimedetailsnoteState {}
 
-class TimedetailsnoteActionState extends TimedetailsnoteState{}
-
 class TimedetailsnoteInitial extends TimedetailsnoteState {}
 
 class HomeLoadedState extends TimedetailsnoteState {
@@ -13,5 +11,5 @@ class HomeLoadedState extends TimedetailsnoteState {
   HomeLoadedState({required this.taskList});
 }
 
-class TaskDeleteState extends TimedetailsnoteActionState{
+class TaskDeleteState extends TimedetailsnoteState{
 }
