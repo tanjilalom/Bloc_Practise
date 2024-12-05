@@ -111,6 +111,7 @@ class _AddTaskAlertDialogState extends State<AddTaskAlertDialog> {
                 context.read<TimedetailsnoteBloc>().add(TaskAddEvent(time: taskdate, text: taskDesc));
                 context.read<TimedetailsnoteBloc>().add(TaskLoadedEvent());
                 Navigator.of(context).pop();
+                debugPrint("]]]]]]]]]]]]]]]]]]]]]]]]]]${context.toString()}");
               } catch (e) {
                 debugPrint(e.toString());
               }

@@ -6,8 +6,7 @@ part 'timedetailsnote_event.dart';
 
 part 'timedetailsnote_state.dart';
 
-class TimedetailsnoteBloc
-    extends Bloc<TimedetailsnoteEvent, TimedetailsnoteState> {
+class TimedetailsnoteBloc extends Bloc<TimedetailsnoteEvent, TimedetailsnoteState> {
   TimedetailsnoteBloc() : super(TimedetailsnoteInitial()) {
 
     Box box = Hive.box('tasksBox');
