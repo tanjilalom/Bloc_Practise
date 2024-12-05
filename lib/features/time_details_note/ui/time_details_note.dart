@@ -12,9 +12,13 @@ class TimeDetailsNote extends StatefulWidget {
 }
 
 class _TimeDetailsNoteState extends State<TimeDetailsNote> {
+  TimedetailsnoteBloc timedetailsnoteBloc = TimedetailsnoteBloc();
+
   @override
   void initState() {
-    context.read<TimedetailsnoteBloc>().add(TaskLoadedEvent());
+
+    timedetailsnoteBloc.add(TaskLoadedEvent());
+    debugPrint("\\a\a\\a\a\\\\\\\\\\\\\\\\\\\\\\\\\\");
     super.initState();
   }
 
@@ -37,7 +41,11 @@ class _TimeDetailsNoteState extends State<TimeDetailsNote> {
         title: const Text('Task List'),
         centerTitle: true,
       ),
-      body: BlocBuilder<TimedetailsnoteBloc, TimedetailsnoteState>(
+      body: BlocConsumer<TimedetailsnoteBloc, TimedetailsnoteState>(
+        bloc: timedetailsnoteBloc,
+        listenWhen: (previous, current) => current is TimedetailsnoteActionState,
+        buildWhen: (previous, current) => current is! TimedetailsnoteActionState,
+        listener: (context, state) {},
         builder: (context, state) {
           if (state is TimedetailsnoteInitial) {
             return const CircularProgressIndicator();

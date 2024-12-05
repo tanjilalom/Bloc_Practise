@@ -1,4 +1,3 @@
-import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -9,20 +8,17 @@ part 'timedetailsnote_state.dart';
 
 class TimedetailsnoteBloc extends Bloc<TimedetailsnoteEvent, TimedetailsnoteState> {
   TimedetailsnoteBloc() : super(TimedetailsnoteInitial()) {
-
+    Box box = Hive.box('tasksBox');
     on<TaskAddEvent>((event, emit) async {
-      var box = await Hive.openBox('tasksBox');
-
       final newTask = {
         'taskDesc': event.text,
         'taskdate': event.time,
       };
-
       await box.add(newTask);
     });
 
     on<TaskLoadedEvent>((event, emit) async {
-      emit(TimedetailsnoteInitial());
+      // emit(TimedetailsnoteInitial());
 
 
       /*var box = await Hive.openBox('tasksBox');
@@ -30,7 +26,6 @@ class TimedetailsnoteBloc extends Bloc<TimedetailsnoteEvent, TimedetailsnoteStat
           box.values.map((e) => Map<String, dynamic>.from(e)).toList();*/
 
 
-      var box = await Hive.openBox('tasksBox');
       List<Map<String, dynamic>> taskList = box.keys.map((key) {
         var value = box.get(key);
         return {
@@ -40,15 +35,12 @@ class TimedetailsnoteBloc extends Bloc<TimedetailsnoteEvent, TimedetailsnoteStat
         };
       }).toList();
 
-
-
-
       emit(HomeLoadedState(taskList: taskList));
     });
 
     on<TaskDeleteEvent>((event, emit) async {
 
-      var box = await Hive.openBox('tasksBox');
+      // var box = await Hive.openBox('tasksBox');
       await box.delete(event.taskKey); // Delete task using its key
       add(TaskLoadedEvent()); // Reload tasks after deletion
 

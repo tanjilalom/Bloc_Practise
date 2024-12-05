@@ -31,20 +31,17 @@ class _HomeState extends State<Home> {
       listener: (context, state) {
         if (state is HomeNavigatetoCartState) {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => Cart()));
+              context, MaterialPageRoute(builder: (context) => const Cart()));
         } else if (state is HomeNavigatetoTimeDetailsState) {
+          debugPrint("/////////////////////////////////////////////");
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => TimeDetailsNote()));
+              context, MaterialPageRoute(builder: (context) => const TimeDetailsNote()));
         }
       },
       builder: (context, state) {
         switch (state.runtimeType) {
           case HomeLoadingState:
-            return const Scaffold(
-              body: Center(
-                child: CircularProgressIndicator(),
-              ),
-            );
+            return Scaffold(body: Center(child: CircularProgressIndicator()));
           case HomeLoadedSuccessState:
             final successState = state as HomeLoadedSuccessState;
             return Scaffold(
@@ -55,7 +52,7 @@ class _HomeState extends State<Home> {
                 actions: [
                   IconButton(
                       onPressed: () {
-                        homeBloc.add(HomeWishlistButtonNavigateEvent());
+                        homeBloc.add(HomeTimeDetailsButtonNavigateEvent());
                       },
                       icon: const Icon(Icons.note_alt_outlined)),
                   IconButton(
@@ -74,11 +71,7 @@ class _HomeState extends State<Home> {
             );
 
           case HomeErrorState:
-            return const Scaffold(
-              body: Center(
-                child: Text('Error'),
-              ),
-            );
+            return const Center(child: Text('Error Occured'),);
           default:
             return const SizedBox();
         }

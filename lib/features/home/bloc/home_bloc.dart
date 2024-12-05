@@ -27,13 +27,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
               .toList()));
     });
 
-    on<HomeWishlistButtonNavigateEvent>((event, emit) {
-      print('Wishlist Nav clicked');
+    on<HomeTimeDetailsButtonNavigateEvent>((event, emit) {
+      print('Time Details Nav clicked');
       emit(HomeNavigatetoTimeDetailsState());
     });
 
     on<HomeCartButtonNavigateEvent>((event, emit) {
-      print('Wishlist Nav clicked');
+      print('Cart Nav clicked');
       emit(HomeNavigatetoCartState());
     });
   }
