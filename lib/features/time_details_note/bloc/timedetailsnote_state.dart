@@ -5,10 +5,10 @@ abstract class TimedetailsnoteState {}
 
 class TimedetailsnoteInitial extends TimedetailsnoteState {}
 
-class HomeLoadedState extends TimedetailsnoteState {
+class TimeLoadedState extends TimedetailsnoteState {
   final List<Map<String, dynamic>> taskList;
 
-  HomeLoadedState({required this.taskList});
+  TimeLoadedState({required this.taskList});
 }
 
 class TaskDeleteState extends TimedetailsnoteState{

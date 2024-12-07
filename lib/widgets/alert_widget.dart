@@ -12,6 +12,10 @@ class AddTaskAlertDialog extends StatefulWidget {
 }
 
 class _AddTaskAlertDialogState extends State<AddTaskAlertDialog> {
+
+  TimedetailsnoteBloc timedetailsnoteBloc = TimedetailsnoteBloc();
+
+
   TimeOfDay selectedTime = TimeOfDay.now();
 
   final TextEditingController taskdateController = TextEditingController();
@@ -108,8 +112,11 @@ class _AddTaskAlertDialogState extends State<AddTaskAlertDialog> {
 
             if (taskdate.isNotEmpty && taskDesc.isNotEmpty) {
               try {
-                context.read<TimedetailsnoteBloc>().add(TaskAddEvent(time: taskdate, text: taskDesc));
-                context.read<TimedetailsnoteBloc>().add(TaskLoadedEvent());
+
+
+                //context.read<TimedetailsnoteBloc>().add(TaskAddEvent(time: taskdate, text: taskDesc));
+                timedetailsnoteBloc.add(TaskAddEvent(time: taskdate, text: taskDesc));
+                timedetailsnoteBloc.add(TaskLoadedEvent());
                 Navigator.of(context).pop();
                 debugPrint("]]]]]]]]]]]]]]]]]]]]]]]]]]${context.toString()}");
               } catch (e) {

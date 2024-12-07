@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:meta/meta.dart';
 
@@ -21,6 +22,7 @@ class TimedetailsnoteBloc extends Bloc<TimedetailsnoteEvent, TimedetailsnoteStat
 
     on<TaskLoadedEvent>((event, emit) async {
       emit(TimedetailsnoteInitial());
+      debugPrint('....//////////////');
 
       /*var box = await Hive.openBox('tasksBox');
       List<Map<String, dynamic>> taskList =
@@ -35,7 +37,9 @@ class TimedetailsnoteBloc extends Bloc<TimedetailsnoteEvent, TimedetailsnoteStat
         };
       }).toList();
 
-      emit(HomeLoadedState(taskList: taskList));
+      debugPrint('------------------------------');
+
+      emit(TimeLoadedState(taskList: taskList));
     });
 
     on<TaskDeleteEvent>((event, emit) async {

@@ -12,11 +12,11 @@ class TimeDetailsNote extends StatefulWidget {
 }
 
 class _TimeDetailsNoteState extends State<TimeDetailsNote> {
+
   TimedetailsnoteBloc timedetailsnoteBloc = TimedetailsnoteBloc();
 
   @override
   void initState() {
-
     timedetailsnoteBloc.add(TaskLoadedEvent());
     debugPrint("\\a\a\\a\a\\\\\\\\\\\\\\\\\\\\\\\\\\");
     super.initState();
@@ -31,7 +31,7 @@ class _TimeDetailsNoteState extends State<TimeDetailsNote> {
           showDialog(
             context: context,
             builder: (BuildContext context) {
-              return const AddTaskAlertDialog(); // Pass callback
+              return AddTaskAlertDialog();
             },
           );
         },
@@ -43,13 +43,13 @@ class _TimeDetailsNoteState extends State<TimeDetailsNote> {
       ),
       body: BlocConsumer<TimedetailsnoteBloc, TimedetailsnoteState>(
         bloc: timedetailsnoteBloc,
-        listenWhen: (previous, current) => current is TimedetailsnoteState,
-        buildWhen: (previous, current) => current is! TimedetailsnoteState,
-        listener: (context, state) {},
+        //listenWhen: (previous, current) => current is TimedetailsnoteState,
+        //buildWhen: (previous, current) => current is TimedetailsnoteState,
+        listener: (context, state) {print('this is listener');},
         builder: (context, state) {
           if (state is TimedetailsnoteInitial) {
-            return Text('no Data');
-          } else if (state is HomeLoadedState) {
+            return const CircularProgressIndicator();
+          } else if (state is TimeLoadedState) {
             if (state.taskList.isEmpty) {
               const Text('No Text Found');
             } else {
