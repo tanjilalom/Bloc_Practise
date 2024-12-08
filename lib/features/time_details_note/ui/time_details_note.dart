@@ -1,4 +1,6 @@
 
+import 'dart:developer';
+
 import 'package:bloc_practise/features/time_details_note/bloc/timedetailsnote_bloc.dart';
 import 'package:bloc_practise/widgets/alert_widget.dart';
 import 'package:flutter/material.dart';
@@ -41,18 +43,27 @@ class _TimeDetailsNoteState extends State<TimeDetailsNote> {
         title: const Text('Task List'),
         centerTitle: true,
       ),
-      body: BlocConsumer<TimedetailsnoteBloc, TimedetailsnoteState>(
-        bloc: timedetailsnoteBloc,
-        //listenWhen: (previous, current) => current is TimedetailsnoteState,
-        //buildWhen: (previous, current) => current is TimedetailsnoteState,
-        listener: (context, state) {print('this is listener');},
+      body: BlocBuilder<TimedetailsnoteBloc, TimedetailsnoteState>(
+        //bloc: timedetailsnoteBloc,
+       //listenWhen: (previous, current) => current is TimedetailsnoteState,
+       // buildWhen: (previous, current) => current is TimeLoadedState,
+        /*listener: (context, state) {
+
+          print('==================================');
+          print(state);
+          print('this is listener');},*/
         builder: (context, state) {
+          print('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
           if (state is TimedetailsnoteInitial) {
             return const CircularProgressIndicator();
           } else if (state is TimeLoadedState) {
-            if (state.taskList.isEmpty) {
-              const Text('No Text Found');
+            log(state.taskList.length.toString(),name: "----------------------");
+            if (state.taskList.length<1) {
+
+
+             return const Text('No Text Found');
             } else {
+              // print('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
               return ListView.separated(
                 padding: const EdgeInsets.all(10),
                 separatorBuilder: (BuildContext context, int index) =>
