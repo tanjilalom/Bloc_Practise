@@ -4,18 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AddTaskAlertDialog extends StatefulWidget {
-
   final TimedetailsnoteBloc timedetailsnoteBloc;
-  const AddTaskAlertDialog({super.key, required this.timedetailsnoteBloc});
 
+  const AddTaskAlertDialog({super.key, required this.timedetailsnoteBloc});
 
   @override
   State<AddTaskAlertDialog> createState() => _AddTaskAlertDialogState();
 }
 
 class _AddTaskAlertDialogState extends State<AddTaskAlertDialog> {
-
-
   TimeOfDay selectedTime = TimeOfDay.now();
 
   final TextEditingController taskdateController = TextEditingController();
@@ -112,21 +109,13 @@ class _AddTaskAlertDialogState extends State<AddTaskAlertDialog> {
 
             if (taskdate.isNotEmpty && taskDesc.isNotEmpty) {
               try {
-
-
                 //context.read<TimedetailsnoteBloc>().add(TaskAddEvent(time: taskdate, text: taskDesc));
                 //context.read<TimedetailsnoteBloc>().add(TaskLoadedEvent());
 
-                widget.timedetailsnoteBloc.add(TaskAddEvent(time: taskdate, text: taskDesc));
-                print('+++++++++++++++++++++++++++++++');
+                widget.timedetailsnoteBloc
+                    .add(TaskAddEvent(time: taskdate, text: taskDesc));
                 widget.timedetailsnoteBloc.add(TaskLoadedEvent());
-
-                print('////////////////////////////');
-
-                // context.read<TimedetailsnoteBloc>().add(TaskLoadedEvent());
                 Navigator.of(context).pop();
-
-                debugPrint("]]]]]]]]]]]]]]]]]]]]]]]]]]${context.toString()}");
               } catch (e) {
                 debugPrint(e.toString());
               }

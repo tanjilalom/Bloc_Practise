@@ -46,12 +46,8 @@ class _TimeDetailsNoteState extends State<TimeDetailsNote> {
       body: BlocBuilder<TimedetailsnoteBloc, TimedetailsnoteState>(
         bloc: timedetailsnoteBloc,
         //listenWhen: (previous, current) => current is TimedetailsnoteState,
-        // buildWhen: (previous, current) => current is TimeLoadedState,
-        /*listener: (context, state) {
-
-          print('==================================');
-          print(state);
-          print('this is listener');},*/
+        // buildWhen: (previous, current) => current is TimedetailsnoteState,
+        // listener: (context, state) {print('this is listener');},
         builder: (context, state) {
           print('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
 
@@ -65,11 +61,11 @@ class _TimeDetailsNoteState extends State<TimeDetailsNote> {
             log(state.taskList.length.toString(),
                 name: "----------------------");
             if (state.taskList.isEmpty) {
-              return const Text('No Text Found');
+              return
+              const Center(child: Text('No List Founds'));
             }
 
             else {
-              // print('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
               return ListView.separated(
                 padding: const EdgeInsets.all(10),
                 separatorBuilder: (BuildContext context, int index) =>
