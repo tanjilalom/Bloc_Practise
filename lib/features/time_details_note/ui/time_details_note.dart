@@ -26,23 +26,17 @@ class _TimeDetailsNoteState extends State<TimeDetailsNote> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: BlocListener<TimedetailsnoteBloc, TimedetailsnoteState>(
-        listener: (context, state) {
-          if (state is TaskshowDialogstate){
-            showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AddTaskAlertDialog();
-              },
-            );
-          }
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add),
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AddTaskAlertDialog(timedetailsnoteBloc: timedetailsnoteBloc,);
+            },
+          );
+          //timedetailsnoteBloc.add(TaskLoadedEvent());
         },
-        child: FloatingActionButton(
-          child: const Icon(Icons.add),
-          onPressed: () {
-            timedetailsnoteBloc.add(TaskshowDialogEvent());
-          },
-        ),
       ),
       appBar: AppBar(
         backgroundColor: Colors.teal,

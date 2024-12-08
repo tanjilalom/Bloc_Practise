@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AddTaskAlertDialog extends StatefulWidget {
-  const AddTaskAlertDialog({super.key});
+
+  final TimedetailsnoteBloc timedetailsnoteBloc;
+
+  const AddTaskAlertDialog({super.key, required this.timedetailsnoteBloc});
 
 
   @override
@@ -13,7 +16,6 @@ class AddTaskAlertDialog extends StatefulWidget {
 
 class _AddTaskAlertDialogState extends State<AddTaskAlertDialog> {
 
-  TimedetailsnoteBloc timedetailsnoteBloc = TimedetailsnoteBloc();
 
   TimeOfDay selectedTime = TimeOfDay.now();
 
@@ -116,8 +118,9 @@ class _AddTaskAlertDialogState extends State<AddTaskAlertDialog> {
                 //context.read<TimedetailsnoteBloc>().add(TaskAddEvent(time: taskdate, text: taskDesc));
                 //context.read<TimedetailsnoteBloc>().add(TaskLoadedEvent());
 
-                timedetailsnoteBloc.add(TaskAddEvent(time: taskdate, text: taskDesc));
+                widget.timedetailsnoteBloc.add(TaskAddEvent(time: taskdate, text: taskDesc));
                 print('+++++++++++++++++++++++++++++++');
+                widget.timedetailsnoteBloc.add(TaskLoadedEvent());
 
                 print('////////////////////////////');
 
