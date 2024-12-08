@@ -2,16 +2,16 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:meta/meta.dart';
-import 'package:equatable/equatable.dart';
 
 part 'timedetailsnote_event.dart';
 
 part 'timedetailsnote_state.dart';
 
-class TimedetailsnoteBloc extends Bloc<TimedetailsnoteEvent, TimedetailsnoteState> {
-  List<Map<String, dynamic>> taskList=[];
-  TimedetailsnoteBloc() : super(TimedetailsnoteInitial()) {
+class TimedetailsnoteBloc
+    extends Bloc<TimedetailsnoteEvent, TimedetailsnoteState> {
+  List<Map<String, dynamic>> taskList = [];
 
+  TimedetailsnoteBloc() : super(TimedetailsnoteInitial()) {
     Box box = Hive.box('tasksBox');
 
     on<TaskAddEvent>((event, emit) async {
@@ -26,9 +26,9 @@ class TimedetailsnoteBloc extends Bloc<TimedetailsnoteEvent, TimedetailsnoteStat
     on<TaskLoadedEvent>((event, emit) async {
       emit(TimedetailsnoteInitial());
       debugPrint('....//////////////');
-      taskList=[];
+      taskList = [];
 
-  taskList = box.keys.map((key) {
+      taskList = box.keys.map((key) {
         var value = box.get(key);
         return {
           'key': key,
@@ -36,9 +36,8 @@ class TimedetailsnoteBloc extends Bloc<TimedetailsnoteEvent, TimedetailsnoteStat
           'taskdate': value['taskdate'],
         };
       }).toList();
-        print('******************************************************');
-        print(" vvvvvvvvvvvvv $taskList");
-
+      print('******************************************************');
+      print(" vvvvvvvvvvvvv $taskList");
 
       emit(TimeLoadedState(taskList: taskList));
     });
@@ -52,7 +51,5 @@ class TimedetailsnoteBloc extends Bloc<TimedetailsnoteEvent, TimedetailsnoteStat
       emit(TaskshowDialogstate());
       //add(TaskLoadedEvent()); // Reload tasks after deletion
     });
-
-
   }
 }

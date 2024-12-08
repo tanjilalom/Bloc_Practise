@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class AddTaskAlertDialog extends StatefulWidget {
 
   final TimedetailsnoteBloc timedetailsnoteBloc;
-
   const AddTaskAlertDialog({super.key, required this.timedetailsnoteBloc});
 
 
