@@ -18,15 +18,26 @@ class ProductTileWidget extends StatelessWidget {
             width: double.infinity,
             decoration: BoxDecoration(
                 image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: NetworkImage(productDataModel.imageUrl,),)
-            ),
+              fit: BoxFit.cover,
+              image: NetworkImage(
+                productDataModel.imageUrl,
+              ),
+            )),
           ),
           const SizedBox(height: 5),
           Text(productDataModel.id),
-          Text("Name : ${productDataModel.name}", style: const TextStyle(fontSize: 22),),
-          Text(productDataModel.description, style: const TextStyle(fontSize: 18),),
-          Text("Price : ${productDataModel.price.toString()}", style: const TextStyle(fontSize: 18),),
+          Text(
+            "Name : ${productDataModel.name}",
+            style: const TextStyle(fontSize: 22),
+          ),
+          Text(
+            productDataModel.description,
+            style: const TextStyle(fontSize: 18),
+          ),
+          Text(
+            "Price : ${productDataModel.price.toString()}",
+            style: const TextStyle(fontSize: 18),
+          ),
         ],
       ),
     );

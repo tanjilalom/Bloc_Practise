@@ -9,8 +9,6 @@ part 'timedetailsnote_state.dart';
 
 class TimedetailsnoteBloc
     extends Bloc<TimedetailsnoteEvent, TimedetailsnoteState> {
-  List<Map<String, dynamic>> taskList = [];
-
   TimedetailsnoteBloc() : super(TimedetailsnoteInitial()) {
     Box box = Hive.box('tasksBox');
 
@@ -25,10 +23,8 @@ class TimedetailsnoteBloc
 
     on<TaskLoadedEvent>((event, emit) async {
       emit(TimedetailsnoteInitial());
-      debugPrint('....//////////////');
-      taskList = [];
 
-      taskList = box.keys.map((key) {
+      List<Map<String, dynamic>> taskList = box.keys.map((key) {
         var value = box.get(key);
         return {
           'key': key,
@@ -37,7 +33,7 @@ class TimedetailsnoteBloc
         };
       }).toList();
       print('******************************************************');
-      print(" vvvvvvvvvvvvv $taskList");
+      print("$taskList");
 
       emit(TimeLoadedState(taskList: taskList));
     });

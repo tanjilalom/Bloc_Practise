@@ -34,8 +34,8 @@ class _HomeState extends State<Home> {
               context, MaterialPageRoute(builder: (context) => const Cart()));
         } else if (state is HomeNavigatetoTimeDetailsState) {
           debugPrint("/////////////////////////////////////////////");
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => const TimeDetailsNote()));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const TimeDetailsNote()));
         }
       },
       builder: (context, state) {
@@ -71,7 +71,9 @@ class _HomeState extends State<Home> {
             );
 
           case HomeErrorState:
-            return const Center(child: Text('Error Occured'),);
+            return const Center(
+              child: Text('Error Occured'),
+            );
           default:
             return const SizedBox();
         }
