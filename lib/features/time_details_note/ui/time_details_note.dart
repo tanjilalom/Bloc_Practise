@@ -1,4 +1,3 @@
-
 import 'dart:developer';
 
 import 'package:bloc_practise/features/time_details_note/bloc/timedetailsnote_bloc.dart';
@@ -27,16 +26,23 @@ class _TimeDetailsNoteState extends State<TimeDetailsNote> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add),
-        onPressed: () {
-          showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AddTaskAlertDialog();
-            },
-          );
+      floatingActionButton: BlocListener<TimedetailsnoteBloc, TimedetailsnoteState>(
+        listener: (context, state) {
+          if (state is TaskshowDialogstate){
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AddTaskAlertDialog();
+              },
+            );
+          }
         },
+        child: FloatingActionButton(
+          child: const Icon(Icons.add),
+          onPressed: () {
+            timedetailsnoteBloc.add(TaskshowDialogEvent());
+          },
+        ),
       ),
       appBar: AppBar(
         backgroundColor: Colors.teal,
@@ -44,9 +50,9 @@ class _TimeDetailsNoteState extends State<TimeDetailsNote> {
         centerTitle: true,
       ),
       body: BlocBuilder<TimedetailsnoteBloc, TimedetailsnoteState>(
-        //bloc: timedetailsnoteBloc,
-       //listenWhen: (previous, current) => current is TimedetailsnoteState,
-       // buildWhen: (previous, current) => current is TimeLoadedState,
+        bloc: timedetailsnoteBloc,
+        //listenWhen: (previous, current) => current is TimedetailsnoteState,
+        // buildWhen: (previous, current) => current is TimeLoadedState,
         /*listener: (context, state) {
 
           print('==================================');
@@ -54,15 +60,21 @@ class _TimeDetailsNoteState extends State<TimeDetailsNote> {
           print('this is listener');},*/
         builder: (context, state) {
           print('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
+
+
           if (state is TimedetailsnoteInitial) {
             return const CircularProgressIndicator();
-          } else if (state is TimeLoadedState) {
-            log(state.taskList.length.toString(),name: "----------------------");
-            if (state.taskList.length<1) {
+          }
 
+          else if (state is TimeLoadedState) {
+            print(state);
+            log(state.taskList.length.toString(),
+                name: "----------------------");
+            if (state.taskList.isEmpty) {
+              return const Text('No Text Found');
+            }
 
-             return const Text('No Text Found');
-            } else {
+            else {
               // print('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
               return ListView.separated(
                 padding: const EdgeInsets.all(10),
@@ -86,9 +98,8 @@ class _TimeDetailsNoteState extends State<TimeDetailsNote> {
                         color: Colors.red,
                       ),
                       onPressed: () {
-                        context
-                            .read<TimedetailsnoteBloc>()
-                            .add(TaskDeleteEvent(taskKey: task['key']));
+                        timedetailsnoteBloc.add(
+                            TaskDeleteEvent(taskKey: task['key']));
                       },
                     ),
                   );
